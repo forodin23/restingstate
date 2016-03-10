@@ -1,0 +1,3 @@
+Enter subject number: 
+Enter night number:
+Session Type: pre-learning (1), post-learning (2), post-recall (3)
