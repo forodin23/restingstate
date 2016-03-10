@@ -43,7 +43,12 @@ mt_setupCards(dirRoot, cfg_window);
 
 %% START    
 
-mt_fixationTask(dirRoot, fixRun);
+    mt_fixationTask(dirRoot, fixRun);
+
+otherwise
+    sca;
+    error('Invalid Session')
+end
 
 % Show final screen
 ShowCursor(CursorType, window);

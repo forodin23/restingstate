@@ -29,14 +29,12 @@ window             = cfg_window.window(1);
 
 %% Show instructions
 if cfg_dlgs.sesstype == 1
-    mt_showText(dirRoot, textFixation1, window);
-elseif cfg_dlgs.sesstype == 2
-    mt_showText(dirRoot, textFixation2, window);
-elseif cfg_dlgs.sesstype == 3
-    mt_showText(dirRoot, textFixation3, window);
-else
-    error('Invalid session type (not 1, 2, or 3)!')
-end
+mt_showText(dirRoot, textFixation1, window);
+elseif cfg_dlgs.sesstype == 1
+mt_showText(dirRoot, textFixation2, window);
+elseif cfg_dlgs.sesstype == 1
+    cfg_dlgs.sesstype == 1
+    el
 
 %% Show fixation cross 
 HideCursor(window);
