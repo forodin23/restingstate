@@ -43,16 +43,7 @@ SessionTime         = performance.SessionTime(1);
 Lab                 = cfg_cases.lab(cfg_dlgs.lab);
 ExperimentName      = {experimentName};
 Subject             = {cfg_dlgs.subject};
-if strcmp(cfg_dlgs.sessName, 'Control')
-    Session         = {cfg_dlgs.sessName};
-    SessionTime         = performance.SessionTime(1);
-elseif strcmp(cfg_dlgs.sessName, 'Fixation')
-    Session         = {'FixationTask'};
-elseif strcmp(performance.session, 'Practice')
-    Session         = {'Practice'};
-else
-    Session         = {[cfg_dlgs.sessName '-' cfg_cases.sessNames{performance.session}]};
-end
+Session             = {cfg_dlgs.sessName};
 if nargin == 4 && isnumeric(varargin{2})
     Accuracy            = varargin{2};
 else
@@ -60,11 +51,9 @@ else
 end
 
 Feedback            = {feedbackOn};
-MemoryVersion       = cfg_cases.memvers(cfg_dlgs.memvers);
-Odor                = {cfg_dlgs.odor};
 
 tableLeft   = table(SessionDate, SessionTime, Lab, ExperimentName, Subject, Session, ...
-    Feedback, MemoryVersion, Odor, Accuracy);
+    Feedback, Accuracy);
 tableLeft   = repmat(tableLeft, nRuns, 1);
 
 % Changing variables

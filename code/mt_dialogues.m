@@ -36,7 +36,7 @@ fclose(fid);
 fid                 = fopen(fullfile(dirRoot,'code','defaults.txt'));
 defaults            = textscan(fid,'%s','Delimiter','\n');
 defaults            = defaults{1};
-defaults{1}         = ['(1 - ' num2str(maxSubjectNr) ')'];
+defaults{1}         = ['(1 - 99)'];
 fclose(fid);
 
 % Pre-allocation of cell array for answer strings
@@ -55,7 +55,7 @@ answered = false;
 while ~answered
     for p = 1 : length(prompts)
         % allow only values as specified in cfg_cases (mt_setup.m)
-        while (p == 1 && ~ismember(str2double(answers{p}), cfg_cases.subjects)) || ...
+        while (p == 1 && isempty(answers{1}{:})) || ...
                 (p == 2 && ~ismember(answers{2}(:), cfg_cases.nights))  || ...
                 (p == 3 && ~ismember(answers{3}(:), cfg_cases.sesstype))
 
@@ -117,14 +117,10 @@ end
 switch upper(user)
     case 'SL3'
         cfg_dlgs.lab    = 2;
-        triggerOdor     = triggerOdorOn{2}      + EEGtrigger;
-        triggerPlacebo  = triggerPlaceboOn{2}   + EEGtrigger;
         sendTrigger = true; % turns on triggers
         % In this lab we use the new olfactometer
     case 'SL4'
         cfg_dlgs.lab    = 3;
-        triggerOdor     = triggerOdorOn{3}      + EEGtrigger;
-        triggerPlacebo  = triggerPlaceboOn{3}   + EEGtrigger;
         sendTrigger = true;
         % In this lab we use the new olfactometer
     otherwise

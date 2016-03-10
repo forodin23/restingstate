@@ -1,6 +1,10 @@
 function mt_run(user)
 % ** function mt_run(user)
-% Main function that runs the task
+% Main function that runs the resting state task. 
+%
+% All this is an adaptation of the far larger memory task program
+% 'sleepmemory'. This is why there is some legacy code that is not really
+% necessary.
 %
 % IMPORTANT: 
 %  First you need to adjust the variables in "mt_setup.m"
@@ -37,9 +41,6 @@ catch ME
         'Check the save destination folder in mt_setup.m and parameter settings.\n'])
     error(ME.message)
 end
-
-% Prepare Card Matrix
-mt_setupCards(dirRoot, cfg_window);
 
 %% START    
 

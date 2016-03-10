@@ -30,6 +30,7 @@ nMinRecall          = 1; % minimum runs for immediate recall (with feedback)
 nMaxRecall          = 1; % maximum runs for immediate recall (to exclude if too poor performance)
 nFinalRecall        = 1; % number of runs for final recall (incl. one last session w/o feedback)
 RecallThreshold     = 40;% miniumum correct answers in recall (in percent)
+fixationDisplay     = (8 * 60);     % Duration of fixation task
 
 % System
 % screenNumber    = 2; % select specific screen
@@ -49,7 +50,7 @@ textFixation1 = { ...
     ''
     'Es ist wichtig, dass du bei der Aufgabe nicht einschläfst.'
     ''
-    'Dies wird etwa 8 Minuten dauern.'
+    ['Dies wird etwa ' num2str(fixationDisplay/60) ' Minuten dauern.']
 };
 textFixation2 = { ...
     ''
@@ -59,7 +60,7 @@ textFixation2 = { ...
     ''
     'Es ist wichtig, dass du bei der Aufgabe nicht einschläfst.'
     ''
-    'Dies wird etwa 8 Minuten dauern.'
+    ['Dies wird etwa ' num2str(fixationDisplay/60) ' Minuten dauern.']
 };
 textFixation3 = { ...
     ''
@@ -69,9 +70,12 @@ textFixation3 = { ...
     ''
     'Es ist wichtig, dass du bei der Aufgabe nicht einschläfst.'
     ''
-    'Dies wird etwa 8 Minuten dauern.'
+    ['Dies wird etwa ' num2str(fixationDisplay/60) ' Minuten dauern.']
+}; 
+textFixationWait = { ...
+    ''
+    ['Wait for ' fixationDisplay ' min.']
 };
-
 textOutro = { ...
     ''
     ''
@@ -106,9 +110,6 @@ textBgColor         = [1 1 1]*0.9; % greyish background
 % Note: by default external screens are automatically used if connected 
 % window              = ;
 
-% Fixation Task (mt_fixationTask)
-fixationDisplay     = (6 * 60);     % Duration of fixation task
-
 
 %% ======================= DO NOT CHANGE FROM HERE ====================== %
 % Unless you know what you are doing...
@@ -135,21 +136,11 @@ if ~exist(fullfile(dirData, 'DATA'), 'dir')
     mkdir(fullfile(dirData, 'BACKUP'))
 end
 
-maxSubjectNr = size(odorTable, 1);
-
 % Changing the accepted cases also requires to change mt_dialogues.m
-cfg_cases.subjects  = 0:maxSubjectNr;                   % 0 is debug
 cfg_cases.nights    = {'1', '2'};                       % Night 1 or 2
 cfg_cases.sesstype  = {'1', '2', '3'};                  % Session Type
 cfg_cases.lab       = {'SL3', 'SL4'};                   % Lab/Location
 cfg_cases.sessNames = {'Pre-Learning', 'Post-Learning', 'Post-Recall'};
-
-% Read in fixation images
-[imgDot, ~, alpha]          = imread(fullfile(imgfolderFeedback, imagesFixation{1}));
-imgDot(:,:,4)               = alpha;
-[imgDotSmall, ~, alpha]     = imread(fullfile(imgfolderFeedback, imagesFixation{2}));
-imgDotSmall(:,:,4)          = alpha;
-
 
 % Save configuration in workdir
 cd(dirRoot)

@@ -41,13 +41,10 @@ end
 %% Show fixation cross 
 HideCursor(window);
 
-% Compute rectangle
-fixRect = CenterRectOnPointd(dotSize, cfg_window.center(1), cfg_window.center(2));
-
 % Save start time of fixation task
 SessionTime         = {datestr(now, 'HH:MM:SS')};
 TrialTime           = {datestr(now, 'HH:MM:SS.FFF')};
-run                 = fixRun;
+run                 = {''};
 % dummies
 correct             = {''};
 imageShown          = {''};
@@ -60,11 +57,11 @@ performance         = table(SessionTime, TrialTime, run, correct, imageShown, im
 mt_saveTable(dirRoot, performance, 0, 0)
 
 % Draw the cross
-imageDot	= Screen('MakeTexture', window, imgDot);
-fixRect     = reshape(fixRect, 4, 1);
-Screen('DrawTexture', window, imageDot, [], fixRect);
+% imageDot	= Screen('MakeTexture', window, imgDot);
+% fixRect     = reshape(fixRect, 4, 1);
+% Screen('DrawTexture', window, imageDot, [], fixRect);
 Screen('Flip', window, flipTime);
-Screen('Close', imageDot);
+% Screen('Close', imageDot);
 if sendTrigger
     calllib('inpoutx64', 'Out32', port, EEGtriggerOn{cfg_dlgs.lab})
 end
